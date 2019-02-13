@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Confirm link Web Component</title>
+    <script src="text.js"></script>
+    <script src="background.js"></script>
+    <style>
+      button{
+        margin: 2em;
+        background-color: black;
+        color: white;
+        padding: 1em;
+      }
+    </style>
+</head>
+<body>
+  <div is="wm-background">
+    <h1 is="wm-text">Hola devscola(;)</h1>
+  </div>
+
+  <button>
+    Toggle Colors
+  </button>
+  <script>
+    this.addEventListener('change-colors', function() {
+      console.log('outside shadowRoot')
+    }.bind(this))
+    document.querySelector('button').addEventListener('click', function() {
+      if(document.querySelector('div').getAttribute('togglecolor') == 'red'){
+        document.querySelector('div').setAttribute('togglecolor', 'black')
+      }else if(document.querySelector('div').getAttribute('togglecolor') == 'black'){
+        document.querySelector('div').setAttribute('togglecolor', 'red')
+      }else{
+        document.querySelector('div').setAttribute('togglecolor', 'red')
+      }
+    })
+    // document.querySelector('div').querySelector('h1').shadowRoot.querySelector('slot').style.color = 'green'
+    // document.querySelector('div').shadowRoot.host.style.backgroundColor = 'green'
+  </script>
+</body>
+</html>
