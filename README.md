@@ -16,6 +16,7 @@ Esta función necesita de la funcion observedAttributes() donde definimos que at
 ### text.js
 
 1. connectedCallback() en esta funcion hacemos creamos un evento para lanzarlo por el árbol del dom y como vemos llega incluso al index.html
+2. Usamos la propiedad detail en el custom event, para enviarnos datos de un componente a otro.
 
 #### Nota mental
 

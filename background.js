@@ -4,11 +4,11 @@ class Background extends HTMLDivElement {
     const shadowRoot = this.attachShadow({mode: 'open'});
     this._addTemplate()
   }
-  
+
   connectedCallback() {
     console.log('connected callback function bacground')
-    this.shadowRoot.addEventListener('change-colors', function() {
-      this._toggleColors()
+    this.shadowRoot.addEventListener('change-colors', function(event) {
+      this._toggleColor(event.detail.color)
     }.bind(this))
   }
 
@@ -35,12 +35,9 @@ class Background extends HTMLDivElement {
     `
   }
 
-  _toggleColors() {
-    if(this.style.backgroundColor == 'red'){
-      this.style.backgroundColor = 'black'
-    }else{
-      this.style.backgroundColor = 'red'
-    }
+  _toggleColor(color) {
+    this.style.backgroundColor = color
+    this.setAttribute('togglecolor', color)
   }
 }
 

@@ -11,8 +11,8 @@ class Text extends HTMLHeadingElement {
 
     this.addEventListener('click', function(event) {
       if(confirm('Do you want to toggle colors?')){
-        this._toggleColors()
-        const changeColorEvent = new Event('change-colors', {bubbles: true})
+        let parentColor = this._toggleColors()
+        const changeColorEvent = new CustomEvent('change-colors', {bubbles: true, detail: {color: parentColor}})
         this.dispatchEvent(changeColorEvent)
       }
     }.bind(this))
@@ -38,8 +38,10 @@ class Text extends HTMLHeadingElement {
   _toggleColors() {
     if(this.style.color == 'red' || this.style.color == ''){
       this.style.color = 'black'
+      return 'red'
     }else{
       this.style.color = 'red'
+      return 'black'
     }
   }
 }
