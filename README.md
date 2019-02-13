@@ -1,4 +1,4 @@
-# Vanilla Confirm Link Web Component
+# Flujo en los web components
 
 Estos web components customizados están hechos con javascript vanilla para entender el flujo de eventos de los web components
 
