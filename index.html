@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-  <div is="wm-background">
+  <div is="wm-background" togglecolor="black">
     <h1 is="wm-text">Hola devscola(;)</h1>
   </div>
 
@@ -32,8 +32,6 @@
       if(document.querySelector('div').getAttribute('togglecolor') == 'red'){
         document.querySelector('div').setAttribute('togglecolor', 'black')
       }else if(document.querySelector('div').getAttribute('togglecolor') == 'black'){
-        document.querySelector('div').setAttribute('togglecolor', 'red')
-      }else{
         document.querySelector('div').setAttribute('togglecolor', 'red')
       }
     })

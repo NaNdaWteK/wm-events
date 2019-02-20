@@ -5,10 +5,8 @@ class Text extends HTMLHeadingElement {
     this._addTemplate()
   }
 
-
   connectedCallback() {
-    console.log('connected callback function text')
-
+    this._initialColor()
     this.addEventListener('click', function(event) {
       if(confirm('Do you want to toggle colors?')){
         let parentColor = this._toggleColors()
@@ -26,7 +24,6 @@ class Text extends HTMLHeadingElement {
     this.shadowRoot.innerHTML=`
     <style>
       :host{
-        color:red;
         padding: 1em;
         font-size: 4em;
       }
@@ -36,13 +33,17 @@ class Text extends HTMLHeadingElement {
   }
 
   _toggleColors() {
-    if(this.style.color == 'red' || this.style.color == ''){
+    if(this.style.color == 'red'){
       this.style.color = 'black'
       return 'red'
     }else{
       this.style.color = 'red'
       return 'black'
     }
+  }
+
+  _initialColor() {
+    this.style.color = 'red'
   }
 }
 

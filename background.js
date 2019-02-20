@@ -1,4 +1,7 @@
 class Background extends HTMLDivElement {
+
+  static get observedAttributes() { return ['togglecolor']; }
+
   constructor() {
     super()
     const shadowRoot = this.attachShadow({mode: 'open'});
@@ -6,23 +9,14 @@ class Background extends HTMLDivElement {
   }
 
   connectedCallback() {
-    console.log('connected callback function bacground')
-    this.shadowRoot.addEventListener('change-colors', function(event) {
-      this._toggleColor(event.detail.color)
-    }.bind(this))
+    this._listenChildEvent()
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log('attribute changed callback function bacground')
-    if(oldValue == null){ oldValue = 'black' }
-    if(this.getAttribute('togglecolor')){
-      this.querySelector('h1').changeColor(oldValue)
-      this.style.backgroundColor = newValue
+    if(this.getAttribute('togglecolor') && this.querySelector('h1')){
+      this._toggleColors(newValue, oldValue)
     }
-
   }
-
-  static get observedAttributes() { return ['togglecolor']; }
 
   _addTemplate() {
     this.shadowRoot.innerHTML=`
@@ -35,8 +29,28 @@ class Background extends HTMLDivElement {
     `
   }
 
+  _listenChildEvent() {
+    this.shadowRoot.addEventListener('change-colors', function(event) {
+      console.log('Child fires an event listened by parent')
+      this._toggleColor(event.detail.color)
+    }.bind(this))
+  }
+
   _toggleColor(color) {
     this.style.backgroundColor = color
+    this._updateAttr(color)
+  }
+
+  _toggleColors(ownColor, childColor) {
+    this.querySelector('h1').changeColor(childColor)
+    this._setBackgroundTo(ownColor)
+  }
+
+  _setBackgroundTo(color){
+    this.style.backgroundColor = color
+  }
+
+  _updateAttr(color) {
     this.setAttribute('togglecolor', color)
   }
 }
